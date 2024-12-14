@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Person</title>
+</head>
+<body>
+
+    <form th:method="PATCH" th:action="@{/people/{id}(id=${person.getId()})}" th:object="${person}">
+        <label for="name">Enter name:</label>
+        <input id="name" type="text" th:field="*{name}"/>
+
+        <br/>
+
+        <label for="surname">Enter surname:</label>
+        <input id="surname" type="text" th:field="*{surname}"/>
+
+        <br/>
+
+        <label for="year">Enter year of birth:</label>
+        <input id="year" type="number" th:field="*{year}"/>
+
+        <br/><br/>
+
+        <input type="submit" value="UPDATE"/>
+    </form>
+
+    <br/>
+
+    <a th:href="@{/people/{id}(id=${person.getId()})}" style="background-color: aqua">BACK</a>
+</body>
+</html>

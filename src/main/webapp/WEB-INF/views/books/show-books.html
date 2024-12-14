@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show Books</title>
+</head>
+<body>
+    <ul style="list-style-type: square;">
+        <li th:each="book : ${books}">
+            <a th:href="@{/books/{id}(id=${book.getId()})}"
+               th:text="${book.getTitle()}">title</a>
+        </li>
+    </ul>
+
+    <hr/>
+
+    <form th:method="GET" th:action="@{/books/new}">
+        <input type="submit" value="NEW"/>
+    </form>
+
+    <br/>
+
+    <form th:method="DELETE" th:action="@{/books}">
+        <input type="submit" value="DELETE ALL"/>
+    </form>
+
+    <br/>
+
+    <a href="/" style="background-color: aqua">BACK</a>
+</body>
+</html>
