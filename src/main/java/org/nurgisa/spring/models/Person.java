@@ -1,9 +1,20 @@
 package org.nurgisa.spring.models;
 
+import javax.validation.constraints.*;
+
 public class Person {
     private int id;
+
+    @NotEmpty(message = "Name should not be empty!")
+    @Pattern(regexp = "[A-Z]\\w+", message = "Name must be in form: Bruno")
     private String name;
+
+    @NotEmpty(message = "Surname should not be empty!")
+    @Pattern(regexp = "[A-Z]\\w+", message = "Surname must be in form: Mars")
     private String surname;
+
+    @Min(value = 1900, message = "Year of birth should be over 1900!")
+    @Max(value = 2024, message = "Year of birth should be under 2024!")
     private int year;
 
     public int getId() {

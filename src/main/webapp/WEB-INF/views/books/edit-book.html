@@ -11,16 +11,26 @@
 
         <label for="title">Enter title:</label>
         <input id="title" type="text" th:field="*{title}"/>
+        <p style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">title error</p>
 
         <br/>
 
         <label for="author">Enter author:</label>
         <input id="author" type="text" th:field="*{author}"/>
+        <p style="color:red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">author error</p>
 
         <br/>
 
         <label for="year">Enter year of release:</label>
         <input id="year" type="number" th:field="*{year}"/>
+        <p style="color:red" th:if="${#fields.hasErrors('year')}" th:errors="*{year}">year error</p>
+
+        <br/>
+
+        <p style="color:red"
+           th:if="${#fields.hasGlobalErrors()}"
+           th:each="error : ${#fields.globalErrors()}"
+           th:text="${error}">global error</p>
 
         <br/><br/>
 

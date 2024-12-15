@@ -3,21 +3,26 @@ package org.nurgisa.spring.controllers;
 import org.nurgisa.spring.dao.PersonDAO;
 import org.nurgisa.spring.models.Book;
 import org.nurgisa.spring.models.Person;
+import org.nurgisa.spring.utils.PersonValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
 @RequestMapping("/people")
 public class PersonController {
     private final PersonDAO personDAO;
+    private final PersonValidator personValidator;
 
     @Autowired
-    public PersonController(PersonDAO personDAO) {
+    public PersonController(PersonDAO personDAO, PersonValidator personValidator) {
         this.personDAO = personDAO;
+        this.personValidator = personValidator;
     }
 
     @GetMapping()
@@ -44,7 +49,15 @@ public class PersonController {
     }
 
     @PostMapping()
-    public String createPerson(@ModelAttribute("person") Person person) {
+    public String createPerson(@ModelAttribute("person") @Valid Person person,
+                               BindingResult bindingResult) {
+
+        personValidator.validate(person, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "people/new-person";
+        }
+
         personDAO.addPerson(person);
         return "redirect:/people";
     }
@@ -57,7 +70,16 @@ public class PersonController {
     }
 
     @PatchMapping("/{id}")
-    public String updatePerson(@PathVariable("id") int id, @ModelAttribute("person") Person person) {
+    public String updatePerson(@PathVariable("id") int id,
+                               @ModelAttribute("person") @Valid Person person,
+                               BindingResult bindingResult) {
+
+        personValidator.validate(person, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return "people/edit-person";
+        }
+
         personDAO.updatePerson(id, person);
         return "redirect:/people/{id}";
     }

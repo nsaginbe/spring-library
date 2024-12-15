@@ -1,10 +1,24 @@
 package org.nurgisa.spring.models;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+
 public class Book {
     private int id;
     private int foreignId;
+
+    @NotEmpty(message = "Title should not be empty!")
+    @Pattern(regexp = "[A-Z].*", message = "Title must start with uppercase letter!")
     private String title;
+
+    @NotEmpty(message = "Author should not be empty!")
+    @Pattern(regexp = "[A-Z]\\w+ [A-Z]\\w+", message = "Author must be in form: Abay Kunanbayev")
     private String author;
+
+    @Min(value = 1, message = "Year of release should be real!")
+    @Max(value = 2024, message = "Year of release should be under 2024!")
     private int year;
 
     public int getId() {
