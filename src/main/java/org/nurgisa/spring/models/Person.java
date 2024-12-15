@@ -13,8 +13,8 @@ public class Person {
     @Pattern(regexp = "[A-Z]\\w+", message = "Surname must be in form: Mars")
     private String surname;
 
-    @Min(value = 1900, message = "Year of birth should be over 1900!")
-    @Max(value = 2024, message = "Year of birth should be under 2024!")
+//    @Min(value = 1900, message = "Year of birth should be over 1900!")
+//    @Max(value = 2024, message = "Year of birth should be under 2024!")
     private int year;
 
     public int getId() {

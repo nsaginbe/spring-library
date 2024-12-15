@@ -39,5 +39,9 @@ public class BookValidator implements Validator {
                 errors.reject("", "This book already exists!");
             }
         }
+
+        if (targetBook.getYear() < 1 || targetBook.getYear() > 2024) {
+            errors.rejectValue("year", "", "Year must be between 1 and 2024!");
+        }
     }
 }

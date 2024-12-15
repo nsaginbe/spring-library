@@ -26,16 +26,20 @@ public class PersonValidator implements Validator {
 
     @Override
     public void validate(Object target, Errors errors) {
-        Person tagetPerson = (Person) target;
+        Person targetPerson = (Person) target;
 
         List<Person> people = personDAO.getPeople();
         for (Person person : people) {
-            if (person.getName().equals(tagetPerson.getName()) &&
-                person.getSurname().equals(tagetPerson.getSurname()) &&
-                person.getId() != tagetPerson.getId()) {
+            if (person.getName().equals(targetPerson.getName()) &&
+                person.getSurname().equals(targetPerson.getSurname()) &&
+                person.getId() != targetPerson.getId()) {
 
                 errors.reject("", "This person already exists!");
             }
+        }
+
+        if (targetPerson.getYear() < 1900 || targetPerson.getYear() > 2024) {
+            errors.rejectValue("year", "", "Year must be between 1900 and 2024!");
         }
     }
 }

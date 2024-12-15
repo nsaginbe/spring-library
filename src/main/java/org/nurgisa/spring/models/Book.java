@@ -17,8 +17,8 @@ public class Book {
     @Pattern(regexp = "[A-Z]\\w+ [A-Z]\\w+", message = "Author must be in form: Abay Kunanbayev")
     private String author;
 
-    @Min(value = 1, message = "Year of release should be real!")
-    @Max(value = 2024, message = "Year of release should be under 2024!")
+//    @Min(value = 1, message = "Year of release should be real!")
+//    @Max(value = 2024, message = "Year of release should be under 2024!")
     private int year;
 
     public int getId() {
